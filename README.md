@@ -1,4 +1,4 @@
-# Retails Chain-Store-Database-Management
+# Retails Chain RDBMS
 Course project of **`Storing and Retrieving Data`**  course - [MDSAA-DS](www.novaims.unl.pt/MDSAA-DS) - Fall 2022
 
 ## How to run
