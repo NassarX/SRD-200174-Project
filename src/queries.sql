@@ -50,3 +50,6 @@ FROM orders
     JOIN product p on p.id = sp.product_id
 GROUP BY l.city, p.id, s.id, avgRate
 ORDER BY avgRate desc ;
+
+select * from vw_invoice_details where invoiceId = 452;
+select * from vw_invoice_summary where invoiceId = 452;
