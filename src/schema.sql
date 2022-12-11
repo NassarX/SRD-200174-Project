@@ -192,7 +192,11 @@ CREATE TABLE IF NOT EXISTS `transaction` (
 	customer_id INT NOT NULL,
 	store_id INT NOT NULL,
 	order_id INT NOT NULL,
-	amount DECIMAL(10,2),
+    discount DECIMAL(10,2) DEFAULT 0,
+    tax_rate DECIMAL(10,2) DEFAULT 5,
+    tax DECIMAL(10,2) DEFAULT 0,
+    sub_total DECIMAL(10,2) DEFAULT 0,
+    total DECIMAL(10,2) DEFAULT 0,
 	date_of_purchase DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	payment_method VARCHAR(40),
 	employee_id INT NOT NULL,
@@ -324,13 +328,25 @@ DELIMITER ;
 # `TR_orders_AUPDATE` A Trigger run After updating order to
 # 1. Check if order status set to `Done` Then
 # 2. Insert a new transaction for that order with all required data.
-# 3. log changes on all affected tabled.
+# 3. Set transaction subTotal, Tax, etc ..
+# 4. log changes on all affected tabled.
 DROP TRIGGER IF EXISTS `TR_orders_AUPDATE`;
 DELIMITER $$
 CREATE TRIGGER `TR_orders_AUPDATE` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
+    DECLARE tTotal INT DEFAULT 0;
+    DECLARE tDiscount INT DEFAULT 0;
+    DECLARE tTaxRate INT DEFAULT 5;
+    DECLARE tTax INT DEFAULT 0;
     IF NEW.status IN ('Done') THEN
-        INSERT INTO transaction (customer_id, store_id, order_id, amount, date_of_purchase, payment_method, employee_id) VALUES
-             (OLD.customer_id, OLD.store_id, OLD.id, OLD.amount, OLD.time, OLD.payment_method, OLD.employee_id);
+        SET tTax = (tTaxRate/100) * OLD.amount;
+        SET tTotal = OLD.amount + tTax;
+        SET tDiscount = 0;
+        INSERT INTO transaction (
+         customer_id, store_id, order_id, sub_total, total,
+         discount,tax_rate, tax, date_of_purchase, payment_method,
+         employee_id) VALUES
+              (OLD.customer_id, OLD.store_id, OLD.id, OLD.amount, tTotal,
+              tDiscount, tTaxRate, tTax, OLD.time, OLD.payment_method, OLD.employee_id);
         INSERT INTO `logs` (`l_table`, `l_action`, `row_identifier`, `new_value`) VALUES ('transaction', 'INSERT', concat('order_id=', OLD.id,', customer_id=', OLD.customer_id, ', store_id=', OLD.store_id), 'New Transaction Been Added');
         INSERT INTO `logs` (`l_table`, `l_action`, `row_identifier`, `new_value`) VALUES ('orders', 'UPDATE', concat('order_id=', OLD.id), concat('status updated to: ', 'Done'));
     END IF;

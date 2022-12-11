@@ -290,9 +290,20 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `TR_orders_AUPDATE` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
+    DECLARE tTotal INT DEFAULT 0;
+    DECLARE tDiscount INT DEFAULT 0;
+    DECLARE tTaxRate INT DEFAULT 5;
+    DECLARE tTax INT DEFAULT 0;
     IF NEW.status IN ('Done') THEN
-        INSERT INTO transaction (customer_id, store_id, order_id, amount, date_of_purchase, payment_method, employee_id) VALUES
-             (OLD.customer_id, OLD.store_id, OLD.id, OLD.amount, OLD.time, OLD.payment_method, OLD.employee_id);
+        SET tTax = (tTaxRate/100) * OLD.amount;
+        SET tTotal = OLD.amount + tTax;
+        SET tDiscount = 0;
+        INSERT INTO transaction (
+         customer_id, store_id, order_id, sub_total, total,
+         discount,tax_rate, tax, date_of_purchase, payment_method,
+         employee_id) VALUES
+              (OLD.customer_id, OLD.store_id, OLD.id, OLD.amount, tTotal,
+              tDiscount, tTaxRate, tTax, OLD.time, OLD.payment_method, OLD.employee_id);
         INSERT INTO `logs` (`l_table`, `l_action`, `row_identifier`, `new_value`) VALUES ('transaction', 'INSERT', concat('order_id=', OLD.id,', customer_id=', OLD.customer_id, ', store_id=', OLD.store_id), 'New Transaction Been Added');
         INSERT INTO `logs` (`l_table`, `l_action`, `row_identifier`, `new_value`) VALUES ('orders', 'UPDATE', concat('order_id=', OLD.id), concat('status updated to: ', 'Done'));
     END IF;
@@ -525,7 +536,11 @@ CREATE TABLE `transaction` (
   `customer_id` int NOT NULL,
   `store_id` int NOT NULL,
   `order_id` int NOT NULL,
-  `amount` decimal(10,2) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT '0.00',
+  `tax_rate` decimal(10,2) DEFAULT '5.00',
+  `tax` decimal(10,2) DEFAULT '0.00',
+  `sub_total` decimal(10,2) DEFAULT '0.00',
+  `total` decimal(10,2) DEFAULT '0.00',
   `date_of_purchase` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `payment_method` varchar(40) DEFAULT NULL,
   `employee_id` int NOT NULL,
@@ -550,4 +565,4 @@ CREATE TABLE `transaction` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-10 22:26:44
+-- Dump completed on 2022-12-11  0:06:31
