@@ -1,17 +1,16 @@
--- MySQL dump 10.13  Distrib 8.0.31, for macos13.0 (arm64)
+DROP DATABASE IF EXISTS `retail_chains`;
+CREATE DATABASE  IF NOT EXISTS `retail_chains` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `retail_chains`;
+-- MySQL dump 10.13  Distrib 8.0.31, for macos12 (x86_64)
 --
--- Host: 127.0.0.1    Database: retail_chains
+-- Host: localhost    Database: retail_chains
 -- ------------------------------------------------------
 -- Server version	8.0.31
-
-DROP DATABASE IF EXISTS `retail_chains`;
-CREATE DATABASE IF NOT EXISTS `retail_chains`;
-USE `retail_chains`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -35,6 +34,15 @@ CREATE TABLE `category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `country`
 --
 
@@ -49,6 +57,15 @@ CREATE TABLE `country` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `country`
+--
+
+LOCK TABLES `country` WRITE;
+/*!40000 ALTER TABLE `country` DISABLE KEYS */;
+/*!40000 ALTER TABLE `country` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `customer`
@@ -69,6 +86,15 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer`
+--
+
+LOCK TABLES `customer` WRITE;
+/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `employee`
@@ -95,6 +121,15 @@ CREATE TABLE `employee` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `job`
 --
 
@@ -109,6 +144,15 @@ CREATE TABLE `job` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `job`
+--
+
+LOCK TABLES `job` WRITE;
+/*!40000 ALTER TABLE `job` DISABLE KEYS */;
+/*!40000 ALTER TABLE `job` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `location`
@@ -131,6 +175,15 @@ CREATE TABLE `location` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `location`
+--
+
+LOCK TABLES `location` WRITE;
+/*!40000 ALTER TABLE `location` DISABLE KEYS */;
+/*!40000 ALTER TABLE `location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `logs`
 --
 
@@ -147,6 +200,15 @@ CREATE TABLE `logs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logs`
+--
+
+LOCK TABLES `logs` WRITE;
+/*!40000 ALTER TABLE `logs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `order_products`
@@ -169,6 +231,15 @@ CREATE TABLE `order_products` (
   CONSTRAINT `fk_order_products_store_products_id` FOREIGN KEY (`store_product_id`) REFERENCES `store_products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_products`
+--
+
+LOCK TABLES `order_products` WRITE;
+/*!40000 ALTER TABLE `order_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_products` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -263,6 +334,15 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -339,6 +419,15 @@ CREATE TABLE `product` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `product`
+--
+
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `product_rate`
 --
 
@@ -363,6 +452,15 @@ CREATE TABLE `product_rate` (
   CONSTRAINT `chk_Ratings` CHECK (((`rate` >= 0) and (`rate` <= 5)))
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_rate`
+--
+
+LOCK TABLES `product_rate` WRITE;
+/*!40000 ALTER TABLE `product_rate` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_rate` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -409,6 +507,15 @@ CREATE TABLE `retail_chain` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `retail_chain`
+--
+
+LOCK TABLES `retail_chain` WRITE;
+/*!40000 ALTER TABLE `retail_chain` DISABLE KEYS */;
+/*!40000 ALTER TABLE `retail_chain` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `store`
 --
 
@@ -427,6 +534,15 @@ CREATE TABLE `store` (
   CONSTRAINT `store_retail_chain_id` FOREIGN KEY (`retail_chain_id`) REFERENCES `retail_chain` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `store`
+--
+
+LOCK TABLES `store` WRITE;
+/*!40000 ALTER TABLE `store` DISABLE KEYS */;
+/*!40000 ALTER TABLE `store` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `store_products`
@@ -453,6 +569,15 @@ CREATE TABLE `store_products` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `store_products`
+--
+
+LOCK TABLES `store_products` WRITE;
+/*!40000 ALTER TABLE `store_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `store_products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `supplier`
 --
 
@@ -471,6 +596,15 @@ CREATE TABLE `supplier` (
   CONSTRAINT `supplier_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `supplier`
+--
+
+LOCK TABLES `supplier` WRITE;
+/*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `supply_process`
@@ -495,6 +629,15 @@ CREATE TABLE `supply_process` (
   CONSTRAINT `fk_supply_process_supplier_id` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `supply_process`
+--
+
+LOCK TABLES `supply_process` WRITE;
+/*!40000 ALTER TABLE `supply_process` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supply_process` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -555,6 +698,135 @@ CREATE TABLE `transaction` (
   CONSTRAINT `transaction_ibfk_4` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction`
+--
+
+LOCK TABLES `transaction` WRITE;
+/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `vw_invoice_details`
+--
+
+DROP TABLE IF EXISTS `vw_invoice_details`;
+/*!50001 DROP VIEW IF EXISTS `vw_invoice_details`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vw_invoice_details` AS SELECT
+ 1 AS `invoiceId`,
+ 1 AS `ProductName`,
+ 1 AS `unitCost`,
+ 1 AS `QTY`,
+ 1 AS `AMOUNT`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vw_invoice_summary`
+--
+
+DROP TABLE IF EXISTS `vw_invoice_summary`;
+/*!50001 DROP VIEW IF EXISTS `vw_invoice_summary`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vw_invoice_summary` AS SELECT
+ 1 AS `invoiceId`,
+ 1 AS `invoiceNumber`,
+ 1 AS `dateOfIssue`,
+ 1 AS `subTotal`,
+ 1 AS `Discount`,
+ 1 AS `taxRate`,
+ 1 AS `Tax`,
+ 1 AS `Total`,
+ 1 AS `clientName`,
+ 1 AS `clientAddress`,
+ 1 AS `storeName`,
+ 1 AS `storeCity`,
+ 1 AS `storeAddress`,
+ 1 AS `storePostalCode`,
+ 1 AS `employeeName`,
+ 1 AS `employeeEmail`,
+ 1 AS `employeeJobtitle`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping events for database 'retail_chains'
+--
+
+--
+-- Dumping routines for database 'retail_chains'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `GET_AvgSales` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_AvgSales`(IN storeId int, IN fromYear int, IN toYear int)
+BEGIN
+        SELECT CONCAT(fromYear, '-', toYear) as PeriodOfSales, SUM(yearlySales.TotalSales) as TotalSales,
+               floor(avg(yearlySales.TotalSales)) as avgYearlySales,
+               floor(avg(monthlySales.TotalSales)) as avgMonthlySales
+        FROM
+        (
+            SELECT SUM(amount) AS TotalSales
+            FROM orders o WHERE store_id = storeId AND YEAR(time) BETWEEN fromYear AND toYear
+            GROUP BY store_id, YEAR(time)
+        ) as yearlySales,
+        (
+            SELECT SUM(amount) AS TotalSales
+            FROM orders WHERE store_id = storeId AND YEAR(time) BETWEEN fromYear AND toYear
+            GROUP BY store_id, YEAR(time), MONTH(time)
+        ) as monthlySales;
+    END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `vw_invoice_details`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_invoice_details`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_invoice_details` AS select `o`.`id` AS `invoiceId`,`p`.`name` AS `ProductName`,`op`.`unit_price` AS `unitCost`,`op`.`quantity` AS `QTY`,`op`.`amount` AS `AMOUNT` from (((`orders` `o` join `order_products` `op` on((`o`.`id` = `op`.`order_id`))) join `store_products` `sp` on((`op`.`store_product_id` = `sp`.`id`))) join `product` `p` on((`sp`.`product_id` = `p`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_invoice_summary`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_invoice_summary`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_invoice_summary` AS select `o`.`id` AS `invoiceId`,`o`.`code` AS `invoiceNumber`,`o`.`time` AS `dateOfIssue`,`t`.`sub_total` AS `subTotal`,`t`.`discount` AS `Discount`,`t`.`tax_rate` AS `taxRate`,`t`.`tax` AS `Tax`,`t`.`total` AS `Total`,concat(`c`.`first_name`,' ',`c`.`last_name`) AS `clientName`,`c`.`address` AS `clientAddress`,`s`.`store_name` AS `storeName`,`l`.`city` AS `storeCity`,`l`.`street_address` AS `storeAddress`,`l`.`postal_code` AS `storePostalCode`,concat(`e`.`first_name`,' ',`e`.`last_name`) AS `employeeName`,`e`.`email` AS `employeeEmail`,`j`.`title` AS `employeeJobtitle` from ((((((`orders` `o` join `transaction` `t` on((`o`.`id` = `t`.`order_id`))) join `store` `s` on((`o`.`store_id` = `s`.`id`))) join `location` `l` on((`s`.`location_id` = `l`.`id`))) join `customer` `c` on((`c`.`id` = `o`.`customer_id`))) join `employee` `e` on((`o`.`employee_id` = `e`.`id`))) join `job` `j` on((`e`.`job_id` = `j`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -565,4 +837,4 @@ CREATE TABLE `transaction` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-11  0:06:31
+-- Dump completed on 2022-12-11  1:45:01
