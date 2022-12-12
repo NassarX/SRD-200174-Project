@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   region VARCHAR(25) NULL,
   country_id INT NOT NULL,
   PRIMARY KEY (id),
+  INDEX `country_id_index` (`country_id`),
   CONSTRAINT location_country_id FOREIGN KEY (country_id) references `country` (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -35,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `retail_chain` (
     url TEXT NULL,
     country_id INT NOT NULL,
     PRIMARY KEY (id),
+    INDEX `country_id_index` (`country_id`),
     CONSTRAINT retail_chain_country_id FOREIGN KEY (country_id) references `country` (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -45,6 +47,8 @@ CREATE TABLE IF NOT EXISTS `store` (
   retail_chain_id INT NULL,
   location_id INT NULL,
   PRIMARY KEY (id),
+  INDEX `retail_chain_id_index` (`retail_chain_id`),
+  INDEX `location_id_index` (`location_id`),
   CONSTRAINT store_retail_chain_id FOREIGN KEY (retail_chain_id) references `retail_chain` (id),
   CONSTRAINT store_location_id FOREIGN KEY (location_id) references `location` (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -69,6 +73,8 @@ CREATE TABLE IF NOT EXISTS `employee` (
   store_id INT NOT NULL,
   job_id INT NOT NULL,
   PRIMARY KEY (id),
+  INDEX `store_id_index` (`store_id`),
+  INDEX `job_id_index` (`job_id`),
   CONSTRAINT fk_employee_store_id FOREIGN KEY (store_id) references `store` (id),
   CONSTRAINT fk_employee_job_id FOREIGN KEY (job_id) references `job` (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -82,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `supplier`(
 	phone VARCHAR(25),
 	location_id INT NOT NULL,
     PRIMARY KEY (id),
+    INDEX `location_id_index` (`location_id`),
     CONSTRAINT supplier_location_id FOREIGN KEY (location_id) references `location` (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -104,6 +111,8 @@ CREATE TABLE IF NOT EXISTS `product`(
     price DECIMAL(10,2) NOT NULL,
     supplier_id INT NOT NULL,
     PRIMARY KEY (id),
+    INDEX `category_id_index` (`category_id`),
+    INDEX `supplier_id_index` (`supplier_id`),
     CONSTRAINT fk_product_category_od FOREIGN KEY (category_id) REFERENCES `category`(id),
     CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES `supplier`(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -118,6 +127,9 @@ CREATE TABLE IF NOT EXISTS `supply_process`(
 	created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME,
 	PRIMARY KEY (supplier_id, product_id, store_id, date),
+    INDEX `supplier_id_index` (`supplier_id`),
+    INDEX `product_id_index` (`product_id`),
+    INDEX `store_id_index` (`store_id`),
 	CONSTRAINT fk_supply_process_supplier_id FOREIGN KEY (supplier_id) REFERENCES `supplier`(id),
 	CONSTRAINT fk_supply_process_product_id FOREIGN KEY (product_id) REFERENCES `product`(id),
 	CONSTRAINT fk_supply_process_store_id FOREIGN KEY (store_id) REFERENCES `store`(id)
@@ -134,6 +146,8 @@ CREATE TABLE IF NOT EXISTS `store_products`(
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME,
     PRIMARY KEY (id),
+    INDEX `store_id_index` (`store_id`),
+    INDEX `product_id_index` (`product_id`),
     CONSTRAINT fk_store_products_store_id FOREIGN KEY (store_id) REFERENCES `store`(id),
     CONSTRAINT fk_store_products_product_id FOREIGN KEY (product_id) REFERENCES `product`(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -167,6 +181,11 @@ CREATE TABLE IF NOT EXISTS `orders` (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME,
   PRIMARY KEY (id),
+  INDEX `code_index` (`code`),
+  INDEX `time_index` (`time`),
+  INDEX `customer_id_index` (`customer_id`),
+  INDEX `store_id_index` (`store_id`),
+  INDEX `employee_id_index` (`employee_id`),
   CONSTRAINT fk_order_customer_id FOREIGN KEY (customer_id) REFERENCES `customer`(id),
   CONSTRAINT fk_order_store_id FOREIGN KEY (store_id) REFERENCES `store`(id),
   CONSTRAINT FOREIGN KEY fk_order_employee_id(employee_id) REFERENCES `employee`(id)
@@ -182,6 +201,8 @@ CREATE TABLE IF NOT EXISTS `order_products` (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME,
   PRIMARY KEY (order_id, store_product_id),
+  INDEX `order_id_index` (`order_id`),
+  INDEX `store_product_id_index` (`store_product_id`),
   CONSTRAINT fk_order_products_order_id FOREIGN KEY (order_id) references `orders`(id),
   CONSTRAINT fk_order_products_store_products_id FOREIGN KEY (store_product_id) references `store_products`(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -202,6 +223,10 @@ CREATE TABLE IF NOT EXISTS `transaction` (
 	employee_id INT NOT NULL,
 	PRIMARY KEY(id),
 	UNIQUE (customer_id, store_id, order_id),
+	INDEX `customer_id_index` (`customer_id`),
+	INDEX `store_id_index` (`store_id`),
+	INDEX `order_id_index` (`order_id`),
+	INDEX `employee_id_index` (`employee_id`),
 	CONSTRAINT FOREIGN KEY fk_transaction_customer_id(customer_id) REFERENCES `customer`(id),
 	CONSTRAINT FOREIGN KEY fk_transaction_store_id(store_id) REFERENCES `store`(id),
 	CONSTRAINT FOREIGN KEY fk_transaction_order_id(order_id) REFERENCES `orders`(id),
@@ -219,6 +244,9 @@ CREATE TABLE IF NOT EXISTS `product_rate`(
     updated_at DATETIME,
     PRIMARY KEY (id),
     UNIQUE (customer_id, store_id, product_id),
+    INDEX `store_id_index` (`store_id`),
+	INDEX `product_id_index` (`product_id`),
+	INDEX `customer_id_index` (`customer_id`),
     CONSTRAINT FOREIGN KEY fk_product_rate_store_id(store_id) REFERENCES `store`(id),
     CONSTRAINT fk_product_rate_products_id FOREIGN KEY (product_id) REFERENCES `product`(id),
     CONSTRAINT fk_product_rate_customer_id FOREIGN KEY (customer_id) REFERENCES `customer`(id),

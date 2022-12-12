@@ -28,6 +28,9 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `TR_orders_BINSERT`;
 DELIMITER $$
 CREATE TRIGGER `TR_orders_BINSERT` BEFORE INSERT ON `orders` FOR EACH ROW BEGIN
+    IF NOT (NEW.code) THEN
+            SET NEW.code = LPAD(FLOOR(RAND() * 999999.99), 13, '0');
+    END IF;
     INSERT INTO `logs` (`l_table`, `l_action`, `row_identifier`, `new_value`) VALUES ('orders', 'INSERT', concat('customer_id=', NEW.customer_id,', store_id=', NEW.store_id), 'New Order Been Added');
 END
 $$
@@ -134,6 +137,7 @@ DELIMITER ;
 
 # `GET_AvgSales` A Stored Procedure to
 # 1. return total sales, yearly and monthly average of given store & period time
+DROP PROCEDURE IF EXISTS `GET_AvgSales`;
 DELIMITER $$
 CREATE PROCEDURE `GET_AvgSales`(IN storeId int, IN fromYear int, IN toYear int)
 BEGIN

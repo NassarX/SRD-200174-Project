@@ -2,25 +2,25 @@
 DROP VIEW IF EXISTS vw_invoice_details;
 CREATE VIEW vw_invoice_details
     AS
-    SELECT o.id as invoiceId, p.name AS ProductName, op.unit_price AS unitCost, op.quantity AS QTY, op.amount AS AMOUNT
-    FROM orders o
-        JOIN order_products op ON o.id = op.order_id
-        JOIN store_products sp ON op.store_product_id = sp.id
-        JOIN product p ON sp.product_id = p.id;
+    SELECT orders.id AS invoiceId, product.name AS ProductName, order_product.unit_price AS unitCost, order_product.quantity AS QTY, order_product.amount AS AMOUNT
+    FROM orders
+        JOIN order_products order_product ON order_product.order_id = orders.id
+        JOIN store_products store_product ON store_product.id = order_product.store_product_id
+        JOIN product ON store_product.product_id = product.id;
 
 #7. Create view to recreate the information on the INVOICE, one view for the details.
 DROP VIEW IF EXISTS vw_invoice_summary;
 CREATE VIEW vw_invoice_summary
     AS
-    SELECT o.id as invoiceId, o.code as invoiceNumber, o.time as dateOfIssue, t.sub_total as subTotal,
-           t.discount as Discount, t.tax_rate as taxRate, t.tax as Tax, t.total as Total,
-           concat(c.first_name, ' ', c.last_name) as clientName, c.address as clientAddress,
-           s.store_name as storeName, l.city as storeCity, l.street_address as storeAddress, l.postal_code as storePostalCode,
-           concat(e.first_name, ' ', e.last_name) as employeeName, e.email as employeeEmail, j.title as employeeJobtitle
-    FROM orders o
-        JOIN transaction t on o.id = t.order_id
-        JOIN store s on o.store_id = s.id
-        JOIN location l on s.location_id = l.id
-        JOIN customer c on c.id = o.customer_id
-        JOIN employee e on o.employee_id = e.id
-        JOIN job j on e.job_id = j.id;
+    SELECT orders.id AS invoiceId, orders.code AS invoiceNumber, orders.time AS dateOfIssue, transaction.sub_total AS subTotal,
+           transaction.discount AS Discount, transaction.tax_rate AS taxRate, transaction.tax AS Tax, transaction.total AS Total,
+           concat(customer.first_name, ' ', customer.last_name) AS clientName, customer.address AS clientAddress,
+           store.store_name AS storeName, location.city AS storeCity, location.street_address AS storeAddress, location.postal_code AS storePostalCode,
+           concat(employee.first_name, ' ', employee.last_name) AS employeeName, employee.email AS employeeEmail, job.title AS employeeJobtitle
+    FROM orders
+        JOIN transaction ON transaction.order_id = orders.id
+        JOIN store ON store.id = orders.store_id
+        JOIN location ON location.id = store.location_id
+        JOIN customer ON customer.id = orders.customer_id
+        JOIN employee ON employee.id = orders.employee_id
+        JOIN job ON job.id = employee.job_id;
