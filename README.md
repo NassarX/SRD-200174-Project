@@ -1,4 +1,4 @@
-# Retails Chain ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=style=flat&logo=MySQL&logoColor=white) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/NassarX/SRD-200174-Project/blob/main/LICENSE)
+# Retails Chain [![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=style=flat&logo=MySQL&logoColor=white)](https://www.mysql.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/NassarX/SRD-200174-Project/blob/main/LICENSE)
 
 Welcome to retail chains RDBMS project! 
 
