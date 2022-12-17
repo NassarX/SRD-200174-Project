@@ -1,3 +1,5 @@
+USE retail_chains;
+
 SET FOREIGN_KEY_CHECKS = 0;
 
 /**

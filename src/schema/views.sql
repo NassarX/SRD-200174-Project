@@ -1,3 +1,5 @@
+USE retail_chains;
+
 # 6. Create view to recreate the information on the INVOICE, one view for the head and totals.
 DROP VIEW IF EXISTS vw_invoice_details;
 CREATE VIEW vw_invoice_details

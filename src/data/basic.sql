@@ -1,3 +1,5 @@
+USE retail_chains;
+
 SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO `country` (`id`, `name`, `code`, `language`) VALUES
