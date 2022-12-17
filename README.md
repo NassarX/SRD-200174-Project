@@ -1,6 +1,6 @@
 # Retails Chain ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=style=flat&logo=MySQL&logoColor=white) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/NassarX/SRD-200174-Project/blob/main/LICENSE)
 
-Welcome to the MySQL retail chain RDBMS project! 
+Welcome to retail chains RDBMS project! 
 
 >A Relational Database Management System (RDBMS) build for retails chain stores as a part of **`Storing and Retrieving Data`**  course - [MDSAA-DS](www.novaims.unl.pt/MDSAA-DS) - Fall 2022
 
@@ -18,7 +18,10 @@ of each store in the chain and handle changes due to supplies.
 >For more details regarding the system please refer to presentation and project description of the system in Documentation folder.
 
 ## Getting started
-To get started with this project, you will need to have MySQL installed on your computer. You can download the community edition of MySQL from the official website [mysql](https://www.mysql.com/).
+
+### Setup Database
+
+>To get started with this project, you will need to have MySQL installed on your computer. You can download the community edition of MySQL from the official website [mysql](https://www.mysql.com/).
 
 Once MySQL is installed, you can test it by creating a new database using the MySQL command-line client. For example:
 
@@ -34,9 +37,7 @@ CREATE TABLE users (
 );
 ```
 
-## Using the Project
-
-> To import and run the project, you will can follow any of next options:
+> To import and run the project, you can follow any of next options:
 1. From MySQL Workbench import and execute `retail-chains-dump.sql` script which Contain 
    - Database schema
    - Triggers
@@ -72,7 +73,7 @@ CREATE TABLE users (
    mysql -uroot -p  < src/data/testing.sql
    ```
 
-
+### Using the Project
 >To use the project, you can write code that accesses and manipulates the data stored in the database. This can be done using a programming language that supports MySQL connectivity, such as Python, Java, C#, etc.
 
 Here is an example of how to connect to the database and execute a simple SELECT query using Python and the MySQL Connector library:
@@ -121,5 +122,10 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 This project makes use of the following open-source libraries:
 
-MySQL Connector - https://dev.mysql.com/downloads/connector/
+- [MySQL](https://www.mysql.com)
+
+- [MySQL Connector](https://dev.mysql.com/downloads/connector/)
+
+- [ChatGPT](https://chat.openai.com/) For generating this README.md :)
+
 We would like to thank the creators and maintainers of these libraries for their valuable contributions to the open-source community.
